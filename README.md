@@ -250,13 +250,6 @@ Source can be located at: https://github.com/raku-community-modules/OpenSSL . Co
 COPYRIGHT AND LICENSE
 =====================
 
-Copyright 2018 - 2020 Edument AB
-
-Copyright 2024 The Raku Community
-
-COPYRIGHT AND LICENSE
-=====================
-
 Copyright 2014 - 2022 Filip Sergot
 
 Copyright 2023 - 2025 The Raku Community
