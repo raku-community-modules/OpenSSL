@@ -15,9 +15,19 @@ class OpenSSL::Stack is repr('CStruct') {
 my sub real_symbol(Str $sym) returns Str {
     state Int $v = OpenSSL::Version::version_num();
     state Bool $is_libressl = OpenSSL::Version::version().contains('LibreSSL');
-    return $v >= 0x10100000 && !$is_libressl ?? "OPENSSL_$sym" !! $sym;
+    $v >= 0x10100000 && !$is_libressl ?? "OPENSSL_$sym" !! $sym;
 }
 
-our sub sk_num(OpenSSL::Stack) returns int32 is native(&gen-lib) is symbol(real_symbol('sk_num')) { ... }
-our sub sk_value(OpenSSL::Stack, int32) returns Pointer is native(&gen-lib) is symbol(real_symbol('sk_value')) { ... }
-our sub sk_free(OpenSSL::Stack) is native(&gen-lib) is symbol(real_symbol('sk_free')) { ... }
+our sub sk_num(
+  OpenSSL::Stack
+--> int32) is native(&gen-lib) is symbol(real_symbol('sk_num')) { ... }
+
+our sub sk_value(
+  OpenSSL::Stack, int32
+--> Pointer) is native(&gen-lib) is symbol(real_symbol('sk_value')) { ... }
+
+our sub sk_free(
+  OpenSSL::Stack
+) is native(&gen-lib) is symbol(real_symbol('sk_free')) { ... }
+
+# vim: expandtab shiftwidth=4

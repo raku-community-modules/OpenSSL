@@ -1,3 +1,4 @@
 .precomp/
 resources/libraries.json
 .idea/
+*.rakucov

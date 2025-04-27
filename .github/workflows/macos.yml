@@ -1,4 +1,4 @@
-name: test
+name: macos
 
 on:
   push:
@@ -15,9 +15,7 @@ jobs:
     strategy:
       matrix:
         os:
-          - ubuntu-latest
           - macos-latest
-          - windows-latest
         raku-version:
           - 'latest'
     runs-on: ${{ matrix.os }}
@@ -27,7 +25,6 @@ jobs:
         with:
           raku-version: ${{ matrix.raku-version }}
       - name: Install Libraries (MacOS)
-        if: matrix.os == 'macOS-latest'
         run: brew install openssl
       - name: Install Dependencies
         run: zef install --/test --test-depends --deps-only .
@@ -35,8 +32,3 @@ jobs:
         run: zef build .
       - name: Stage, Test, and Installation
         run: zef install . --debug
-      - name: Ensure dll rename hack works
-        if: runner.os == 'Windows'
-        run: |
-          Remove-Item -Path $env:TEMP\* -Recurse -Force -ErrorAction Ignore
-          raku ${{ github.workspace }}/t/06-digest-md5.t

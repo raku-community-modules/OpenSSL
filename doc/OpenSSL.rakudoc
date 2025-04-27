@@ -1,186 +1,201 @@
-[![Actions Status](https://github.com/raku-community-modules/OpenSSL/actions/workflows/linux.yml/badge.svg)](https://github.com/raku-community-modules/OpenSSL/actions) [![Actions Status](https://github.com/raku-community-modules/OpenSSL/actions/workflows/macos.yml/badge.svg)](https://github.com/raku-community-modules/OpenSSL/actions) [![Actions Status](https://github.com/raku-community-modules/OpenSSL/actions/workflows/windows.yml/badge.svg)](https://github.com/raku-community-modules/OpenSSL/actions)
+=begin pod
 
-NAME
-====
+=head1 NAME
 
 OpenSSL - OpenSSL bindings
 
-SYNOPSIS
-========
+=head1 SYNOPSIS
 
-```raku
+=begin code :lang<raku>
+
 use OpenSSL;
 my $openssl = OpenSSL.new;
 $openssl.set-fd(123);
 $openssl.write("GET / HTTP/1.1\r\nHost: somehost\r\n\r\n");
-```
 
-DESCRIPTION
-===========
+=end code
+
+=head1 DESCRIPTION
 
 A module which provides OpenSSL bindings, making us able to set up a TLS/SSL connection.
 
-METHODS
-=======
+=head1 METHODS
 
-method new
-----------
+=head2 method new
 
-```raku
+=begin code :lang<raku>
+
 method new(Bool :$client = False, Int :$version?)
-```
 
-A constructor. Initializes OpenSSL library, sets method and context. If $version is not specified, the highest possible version is negotiated.
+=end code
 
-method set-fd
--------------
+A constructor. Initializes OpenSSL library, sets method and context.
+If $version is not specified, the highest possible version is negotiated.
 
-```raku
+=head2 method set-fd
+
+=begin code :lang<raku>
+
 method set-fd(OpenSSL:, int32 $fd)
-```
+
+=end code
 
 Assings connection's file descriptor (file handle) $fd to the SSL object.
 
-To get the $fd we should use C to set up the connection. (See [NativeCall](NativeCall)) I hope we will be able to use Raku's IO::Socket module instead of connecting through C soon-ish.
+To get the $fd we should use C to set up the connection. (See L<NativeCall>)
+I hope we will be able to use Raku's IO::Socket module instead of
+connecting through C soon-ish.
 
-method set-connect-state
-------------------------
+=head2 method set-connect-state
 
-```raku
+=begin code :lang<raku>
+
 method set-connect-state(OpenSSL:)
-```
+
+=end code
 
 Sets SSL object to connect (client) state.
 
 Use it when you want to connect to SSL servers.
 
-method set-accept-state
------------------------
+=head2 method set-accept-state
 
-```raku
+=begin code :lang<raku>
+
 method set-accept-state(OpenSSL:)
-```
+
+=end code
 
 Sets SSL object to accept (server) state.
 
 Use it when you want to provide an SSL server.
 
-method connect
---------------
+=head2 method connect
 
-```raku
+=begin code :lang<raku>
+
 method connect(OpenSSL:)
-```
+
+=end code
 
 Connects to the server using $fd (passed using .set-fd).
 
 Does all the SSL stuff like handshaking.
 
-method accept
--------------
+=head2 method accept
 
-```raku
+=begin code :lang<raku>
+
 method accept(OpenSSL:)
-```
+
+=end code
 
 Accepts new client connection.
 
 Does all the SSL stuff like handshaking.
 
-method write
-------------
+=head2 method write
 
-```raku
+=begin code :lang<raku>
+
 method write(OpenSSL:, Str $s)
-```
+
+=end code
 
 Sends $s to the other side (server/client).
 
-method read
------------
+=head2 method read
 
-```raku
+=begin code :lang<raku>
+
 method read(OpenSSL:, Int $n, Bool :$bin)
-```
+
+=end code
 
 Reads $n bytes from the other side (server/client).
 
 Bool :$bin if we want it to return Buf instead of Str.
 
-method use-certificate-file
----------------------------
+=head2 method use-certificate-file
 
-```raku
+=begin code :lang<raku>
+
 method use-certificate-file(OpenSSL:, Str $file)
-```
+
+=end code
 
 Assings a certificate (from file) to the SSL object.
 
-method use-privatekey-file
---------------------------
+=head2 method use-privatekey-file
 
-```raku
+=begin code :lang<raku>
+
 method use-privatekey-file(OpenSSL:, Str $file)
-```
+
+=end code
 
 Assings a private key (from file) to the SSL object.
 
-method check-private-key
-------------------------
+=head2 method check-private-key
 
-```raku
+=begin code :lang<raku>
+
 method check-private-key(OpenSSL:)
-```
+
+=end code
 
 Checks if private key is valid.
 
-method shutdown
----------------
+=head2 method shutdown
 
-```raku
+=begin code :lang<raku>
+
 method shutdown(OpenSSL:)
-```
+
+=end code
 
 Turns off the connection.
 
-method ctx-free
----------------
+=head2 method ctx-free
 
-```raku
+=begin code :lang<raku>
+
 method ctx-free(OpenSSL:)
-```
+
+=end code
 
 Frees C's SSL_CTX struct.
 
-method ssl-free
----------------
+=head2 method ssl-free
 
-```raku
+=begin code :lang<raku>
+
 method ssl-free(OpenSSL:)
-```
+
+=end code
 
 Frees C's SSL struct.
 
-method close
-------------
+=head2 method close
 
-```raku
+=begin code :lang<raku>
+
 method close(OpenSSL:)
-```
+
+=end code
 
 Closes the connection.
 
 Unlike .shutdown it calls ssl-free, ctx-free, and then it shutdowns.
 
-TOOLS
-=====
+=head1 TOOLS
 
 Public key signing tools.
 
-OpenSSL::RSATools
------------------
+=head2 OpenSSL::RSATools
 
-```raku
+=begin code :lang<raku>
+
 use OpenSSL::RSATools;
 
 my $pem = slurp 'key.pem';
@@ -189,14 +204,15 @@ my $data = 'as df jk l';
 my $signature = $rsa.sign($data.encode);
 my $rsa = OpenSSL::RSAKey.new(public-pem => $public);
 if $rsa.verify($data.encode, $signature) { ... }
-```
 
-OpenSSL::CryptTools
--------------------
+=end code
+
+=head2 OpenSSL::CryptTools
 
 Symmetric encryption tools (currently only AES256/192/128 encrypt/decrypt)
 
-```raku
+=begin code :lang<raku>
+
 use OpenSSL::CryptTools;
 
 my $ciphertext = encrypt("asdf".encode,
@@ -207,24 +223,26 @@ my $plaintext = decrypt($ciphertext,
                         :aes256,
                         :iv(("0" x 16).encode),
                         :key(('x' x 32).encode));
-```
 
-OpenSSL::Digest
----------------
+=end code
+
+=head2 OpenSSL::Digest
 
 Digest Functions (currently only md5/sha1/sha256/sha384/sha512)
 
-```raku
+=begin code :lang<raku>
+
 use OpenSSL::Digest;
 my Blob $digest = md5("xyz".encode);
-```
 
-OpenSSL::Digest::MD5
---------------------
+=end code
+
+=head2  OpenSSL::Digest::MD5
 
 OO-Interface supporting incremental digesting
 
-```raku
+=begin code :lang<raku>
+
 use OpenSSL::Digest::MD5;
 
 my $md5 = OpenSSL::Digest::MD5.new; # Create fresh object
@@ -233,29 +251,27 @@ $md5.add('def');                    # Add some more data
 my $digest = $md5.hash;             # Blob hash (and reset)
 $md5.addfile('myfile');             # Read a file
 my $hexdigest = $md5.hex;           # hex hash  (and reset)
-```
 
-SEE ALSO
-========
+=end code
 
-[IO::Socket::SSL](IO::Socket::SSL)
+=head1 SEE ALSO
 
-AUTHOR
-======
+L<IO::Socket::SSL>
 
-  * Filip Sergot
+=head1 AUTHOR
 
-Source can be located at: https://github.com/raku-community-modules/OpenSSL . Comments and Pull Requests are welcome.
+=item Filip Sergot
 
-COPYRIGHT AND LICENSE
-=====================
+Source can be located at: https://github.com/raku-community-modules/OpenSSL .
+Comments and Pull Requests are welcome.
+
+=head1 COPYRIGHT AND LICENSE
 
 Copyright 2018 - 2020 Edument AB
 
 Copyright 2024 The Raku Community
 
-COPYRIGHT AND LICENSE
-=====================
+=head1 COPYRIGHT AND LICENSE
 
 Copyright 2014 - 2022 Filip Sergot
 
@@ -263,3 +279,6 @@ Copyright 2023 - 2025 The Raku Community
 
 This library is free software; you can redistribute it and/or modify it under the MIT License.
 
+=end pod
+
+# vim: expandtab shiftwidth=4

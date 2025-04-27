@@ -41,5 +41,7 @@ sub dll-resource($resource-name) {
         $dll-resource.spurt($resource-data, :bin, :close);
     }
 
-    return $dll-resource.absolute;
+    $dll-resource.absolute
 }
+
+# vim: expandtab shiftwidth=4

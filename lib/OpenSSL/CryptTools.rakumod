@@ -7,15 +7,15 @@ our proto sub encrypt(|) is export {*}
 
 multi sub encrypt(:$aes256! where .so, |c) is export {
     my $cipher = OpenSSL::EVP::EVP_aes_256_cbc();
-    encrypt(:$cipher, |c);
+    encrypt(:$cipher, |c)
 }
 multi sub encrypt(:$aes192! where .so, |c) is export {
     my $cipher = OpenSSL::EVP::EVP_aes_192_cbc();
-    encrypt(:$cipher, |c);
+    encrypt(:$cipher, |c)
 }
 multi sub encrypt(:$aes128! where .so, |c) is export {
     my $cipher = OpenSSL::EVP::EVP_aes_128_cbc();
-    encrypt(:$cipher, |c);
+    encrypt(:$cipher, |c)
 }
 
 multi sub encrypt(Blob $plaintext, :$key, :$iv, :$cipher! where .so) is export {
@@ -49,22 +49,22 @@ multi sub encrypt(Blob $plaintext, :$key, :$iv, :$cipher! where .so) is export {
 
     OpenSSL::EVP::EVP_CIPHER_CTX_free($ctx);
 
-    return $out;
+    $out
 }
 
 our proto sub decrypt(|) is export {*}
 
 multi sub decrypt(:$aes256! where .so, |c) is export {
     my $cipher = OpenSSL::EVP::EVP_aes_256_cbc();
-    decrypt(:$cipher, |c);
+    decrypt(:$cipher, |c)
 }
 multi sub decrypt(:$aes192! where .so, |c) is export {
     my $cipher = OpenSSL::EVP::EVP_aes_192_cbc();
-    decrypt(:$cipher, |c);
+    decrypt(:$cipher, |c)
 }
 multi sub decrypt(:$aes128! where .so, |c) is export {
     my $cipher = OpenSSL::EVP::EVP_aes_128_cbc();
-    decrypt(:$cipher, |c);
+    decrypt(:$cipher, |c)
 }
 
 multi sub decrypt(Blob $ciphertext, :$key, :$iv, :$cipher! where .so) is export {
@@ -98,5 +98,7 @@ multi sub decrypt(Blob $ciphertext, :$key, :$iv, :$cipher! where .so) is export 
 
     OpenSSL::EVP::EVP_CIPHER_CTX_free($ctx);
 
-    return $out;
+    $out
 }
+
+# vim: expandtab shiftwidth=4
