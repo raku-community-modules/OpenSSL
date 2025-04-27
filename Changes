@@ -1,4 +1,7 @@
 Revision history for OpenSSL
 
 {{$NEXT}}
+
+0.2.3  2025-04-27T13:20:11+02:00
+    - Added binding to AES-128-CTR, pheix++
     - Initial version as a Raku Community Module
