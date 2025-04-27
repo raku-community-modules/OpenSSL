@@ -61,5 +61,6 @@ class evp_cipher_st is repr('CStruct') {
 our sub EVP_aes_128_cbc( --> OpaquePointer) is native(&gen-lib) { ... }
 our sub EVP_aes_192_cbc( --> OpaquePointer) is native(&gen-lib) { ... }
 our sub EVP_aes_256_cbc( --> OpaquePointer) is native(&gen-lib) { ... }
+our sub EVP_aes_128_ctr( --> OpaquePointer) is native(&gen-lib) { ... }
 
 # vim: expandtab shiftwidth=4

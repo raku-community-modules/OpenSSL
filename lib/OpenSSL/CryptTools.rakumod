@@ -17,6 +17,10 @@ multi sub encrypt(:$aes128! where .so, |c) is export {
     my $cipher = OpenSSL::EVP::EVP_aes_128_cbc();
     encrypt(:$cipher, |c)
 }
+multi sub encrypt(:$aes128ctr! where .so, |c) is export {
+    my $cipher = OpenSSL::EVP::EVP_aes_128_ctr();
+    encrypt(:$cipher, |c);
+}
 
 multi sub encrypt(Blob $plaintext, :$key, :$iv, :$cipher! where .so) is export {
     my $ctx = OpenSSL::EVP::EVP_CIPHER_CTX_new();
@@ -65,6 +69,10 @@ multi sub decrypt(:$aes192! where .so, |c) is export {
 multi sub decrypt(:$aes128! where .so, |c) is export {
     my $cipher = OpenSSL::EVP::EVP_aes_128_cbc();
     decrypt(:$cipher, |c)
+}
+multi sub decrypt(:$aes128ctr! where .so, |c) is export {
+    my $cipher = OpenSSL::EVP::EVP_aes_128_ctr();
+    decrypt(:$cipher, |c);
 }
 
 multi sub decrypt(Blob $ciphertext, :$key, :$iv, :$cipher! where .so) is export {

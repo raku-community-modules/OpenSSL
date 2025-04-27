@@ -1,7 +1,7 @@
 use v6;
 use Test;
 
-plan 11;
+plan 13;
 
 use OpenSSL::CryptTools;
 
@@ -33,6 +33,11 @@ $ciphertext = encrypt($test, :aes128, :$iv, :$key);
 is-deeply $ciphertext[0..^16], (97,133,236,148,181,60,72,129,145,40,31,27,41,81,165,18), "got aes128 expected ciphertext";
 $plaintext = decrypt($ciphertext, :aes128, :$iv, :$key);
 is-deeply $plaintext[0..^16], $test[0..^16], 'aes128 encrypt/decrypt roundtrip';
+
+$ciphertext = encrypt($test, :aes128ctr, :$iv, :$key);
+is-deeply $ciphertext[0..^16], (32,47,63,22,170,182,213,205,110,114,47,196,218,57,59,113), "got 'aes128ctr expected ciphertext";
+$plaintext = decrypt($ciphertext, :aes128ctr, :$iv, :$key);
+is-deeply $plaintext[0..^16], $test[0..^16], 'aes128ctr encrypt/decrypt roundtrip';
 
 $key.reallocate(192 div 8);
 $ciphertext = encrypt($test, :aes192, :$iv, :$key);
