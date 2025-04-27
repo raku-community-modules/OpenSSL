@@ -1,0 +1,32 @@
+name: linux
+
+on:
+  push:
+    branches:
+      - '*'
+    tags-ignore:
+      - '*'
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  raku:
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+        raku-version:
+          - 'latest'
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: Raku/setup-raku@v1
+        with:
+          raku-version: ${{ matrix.raku-version }}
+      - name: Install Dependencies
+        run: zef install --/test --test-depends --deps-only .
+      - name: Build
+        run: zef build .
+      - name: Stage, Test, and Installation
+        run: zef install . --debug

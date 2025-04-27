@@ -30,16 +30,18 @@ sub crypto-lib is export {
 # XXX: This should be removed when CURI/%?RESOURCES gets a mechanism to bypass name mangling
 use nqp;
 sub dll-resource($resource-name) {
-    my $resource      = %?RESOURCES{$resource-name};
-    return $resource.absolute if $resource.basename eq $resource-name;
+    my $content-id    = nqp::sha1($resource-name);
+    my $dll-directory = $*TMPDIR.add($content-id);
+    my $dll-resource  = $dll-directory.add($resource-name);
 
-    my $content_id    = nqp::sha1($resource.absolute);
-    my $content_store = $*TMPDIR.child($content_id);
-    my $content_file  = $content_store.child($resource-name).absolute;
-    return $content_file if $content_file.IO.e;
+    unless $dll-resource.e {
+        mkdir $dll-directory unless $dll-directory.e;
+        my $resource = %?RESOURCES{$resource-name};
+        my $resource-data := %?RESOURCES{$resource-name}.slurp(:bin, :close);
+        $dll-resource.spurt($resource-data, :bin, :close);
+    }
 
-    mkdir $content_store unless $content_store.e;
-    copy($resource, $content_file);
-
-    $content_file;
+    $dll-resource.absolute
 }
+
+# vim: expandtab shiftwidth=4

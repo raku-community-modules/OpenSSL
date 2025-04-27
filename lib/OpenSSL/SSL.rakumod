@@ -36,27 +36,75 @@ class SSL is repr('CStruct') {
     has int32 $.rstate;
 }
 
-our sub SSL_library_init() is native(&ssl-lib)                                 { ... }
-our sub OPENSSL_init_ssl(uint64, OpaquePointer) is native(&ssl-lib)            { ... }
-our sub SSL_load_error_strings() is native(&ssl-lib)                           { ... }
+our sub SSL_library_init() is native(&ssl-lib)  { ... }
 
-our sub SSL_new(OpenSSL::Ctx::SSL_CTX) returns SSL is native(&ssl-lib)         { ... }
-our sub SSL_set_fd(SSL, int32) returns int32 is native(&ssl-lib)               { ... }
-our sub SSL_shutdown(SSL) returns int32 is native(&ssl-lib)                    { ... }
-our sub SSL_free(SSL) is native(&ssl-lib)                                      { ... }
-our sub SSL_get_error(SSL, int32) returns int32 is native(&ssl-lib)            { ... }
-our sub SSL_accept(SSL) returns int32 is native(&ssl-lib)                      { ... }
-our sub SSL_connect(SSL) returns int32 is native(&ssl-lib)                     { ... }
-our sub SSL_read(SSL, Blob, int32) returns int32 is native(&ssl-lib)  { ... }
-our sub SSL_write(SSL, Blob, int32) returns int32 is native(&ssl-lib) { ... }
-our sub SSL_set_connect_state(SSL) is native(&ssl-lib)                         { ... }
-our sub SSL_set_accept_state(SSL) is native(&ssl-lib)                          { ... }
+our sub OPENSSL_init_ssl(
+  uint64, OpaquePointer
+) is native(&ssl-lib) { ... }
 
-our sub SSL_set_bio(SSL, OpaquePointer, OpaquePointer) returns int32 is native(&ssl-lib) { ... }
+our sub SSL_load_error_strings() is native(&ssl-lib) { ... }
 
-our sub SSL_load_client_CA_file(CArray[uint8]) returns OpenSSL::Stack is native(&ssl-lib)  { ... };
-our sub SSL_get_client_CA_list(SSL) returns OpenSSL::Stack is native(&ssl-lib)             { ... };
-our sub SSL_set_client_CA_list(SSL, OpenSSL::Stack) is native(&ssl-lib)                    { ... };
+our sub SSL_new(
+  OpenSSL::Ctx::SSL_CTX
+--> SSL) is native(&ssl-lib) { ... }
+
+our sub SSL_set_fd(
+  SSL, int32
+--> int32) is native(&ssl-lib) { ... }
+
+our sub SSL_shutdown(
+  SSL
+--> int32) is native(&ssl-lib) { ... }
+
+our sub SSL_free(SSL) is native(&ssl-lib) { ... }
+
+our sub SSL_get_error(
+  SSL, int32
+--> int32) is native(&ssl-lib) { ... }
+
+our sub SSL_accept(
+  SSL
+--> int32) is native(&ssl-lib) { ... }
+
+our sub SSL_connect(
+  SSL
+--> int32) is native(&ssl-lib) { ... }
+
+our sub SSL_read(
+  SSL, Blob, int32
+--> int32) is native(&ssl-lib)  { ... }
+
+our sub SSL_write(
+  SSL, Blob, int32
+--> int32) is native(&ssl-lib) { ... }
+
+our sub SSL_set_connect_state(
+  SSL
+) is native(&ssl-lib) { ... }
+
+our sub SSL_set_accept_state(
+  SSL
+) is native(&ssl-lib) { ... }
+
+our sub SSL_set_bio(
+  SSL, OpaquePointer, OpaquePointer
+--> int32) is native(&ssl-lib) { ... }
+
+our sub SSL_load_client_CA_file(
+  CArray[uint8]
+--> OpenSSL::Stack) is native(&ssl-lib)  { ... }
+
+our sub SSL_get_client_CA_list(
+  SSL
+--> OpenSSL::Stack) is native(&ssl-lib) { ... }
+
+our sub SSL_set_client_CA_list(
+  SSL, OpenSSL::Stack
+) is native(&ssl-lib) { ... }
 
 # long SSL_ctrl(SSL *ssl, int cmd, long larg, void *parg)
-our sub SSL_ctrl(SSL, int32, long, Str ) returns long is native(&ssl-lib) { ... }
+our sub SSL_ctrl(
+  SSL, int32, long, Str
+--> long) is native(&ssl-lib) { ... }
+
+# vim: expandtab shiftwidth=4

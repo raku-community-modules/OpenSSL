@@ -90,7 +90,7 @@ class OpenSSL::RSAKey {
 
         die "Failed to sign" unless $ret == 1;
 
-        return $sig.subbuf(0, $slen[0]);
+        $sig.subbuf(0, $slen[0])
     }
 
     method verify(Blob $blob, Blob $sig, :$sha1, :$sha256) {
@@ -107,7 +107,8 @@ class OpenSSL::RSAKey {
 
         my $ret = OpenSSL::RSA::RSA_verify($type, $hashed, $hashed.bytes, $sig, $sig.bytes, $.rsa);
 
-        return True if $ret == 1;
-        return False;
+        $ret == 1
     }
 }
+
+# vim: expandtab shiftwidth=4
