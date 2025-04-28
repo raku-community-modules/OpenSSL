@@ -49,3 +49,5 @@ sub fetch($host, $url) {
     $s.close;
     $result
 }
+
+# vim: expandtab shiftwidth=4

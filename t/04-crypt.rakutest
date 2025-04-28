@@ -1,9 +1,7 @@
-use v6;
 use Test;
+use OpenSSL::CryptTools;
 
 plan 13;
-
-use OpenSSL::CryptTools;
 
 ok 1, 'can load module';
 
@@ -44,3 +42,5 @@ $ciphertext = encrypt($test, :aes192, :$iv, :$key);
 is-deeply $ciphertext[0..^16], (108, 43, 13, 72, 123, 90, 223, 254, 165, 189, 230, 75, 140, 224, 182, 49), "got aes192 expected ciphertext";
 $plaintext = decrypt($ciphertext, :aes192, :$iv, :$key);
 is-deeply $plaintext[0..^16], $test[0..^16], 'aes192 encrypt/decrypt roundtrip';
+
+# vim: expandtab shiftwidth=4

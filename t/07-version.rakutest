@@ -20,3 +20,5 @@ isa-ok OpenSSL::Version::version(OpenSSL::Version::DIR), Str,
     "version(DIR) is-a 'Str'";
 isa-ok OpenSSL::Version::version(OpenSSL::Version::ENGINES_DIR), Str,
     "version(ENGINES_DIR) is-a 'Str'";
+
+# vim: expandtab shiftwidth=4

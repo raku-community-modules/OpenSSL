@@ -1,9 +1,7 @@
-use v6;
 use Test;
+use OpenSSL::RSATools;
 
 plan 8;
-
-use OpenSSL::RSATools;
 
 my $pem = slurp 't/key.pem';
 
@@ -24,3 +22,5 @@ ok $sha256-signature ne $signature, 'Different signature than sha1';
 
 ok $rsa.verify($data.encode, $sha256-signature, :sha256), 'Can verify correctly (sha256)';
 ok !$rsa.verify("asdf".encode, $sha256-signature, :sha256), 'verify fails on different data (sha256)';
+
+# vim: expandtab shiftwidth=4

@@ -22,3 +22,5 @@ ok $ssl.write("GET / HTTP/1.1\r\n\r\n"), 'write';
 ok $ssl.read(1) == 0, 'read';
 
 ok $ssl.close, 'close';
+
+# vim: expandtab shiftwidth=4

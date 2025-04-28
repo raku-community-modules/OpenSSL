@@ -30,5 +30,5 @@ jobs:
         run: zef install --/test --test-depends --deps-only .
       - name: Build
         run: zef build .
-      - name: Stage, Test, and Installation
-        run: zef install . --debug
+      - name: Run Special Tests
+        run: raku run-tests -i
