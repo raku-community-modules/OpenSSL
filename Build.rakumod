@@ -9,12 +9,18 @@ method build($cwd --> Bool) {
     my $prefix;
     if %*ENV<OPENSSL_PREFIX>:exists {
         $prefix = %*ENV<OPENSSL_PREFIX>;
-    } elsif !$*DISTRO.is-win {
+    }
+    elsif !$*DISTRO.is-win {
         my $proc = run "brew", "--prefix", "--installed", "openssl", :out, :!err;
-        if ?$proc {
+        if $proc {
             $prefix = $proc.out.slurp(:close).chomp;
+
+            # If MacOS::NativeCall is install, make sure symlinks are
+            # installed to avoid "unsafe use" errors
+            try 'use MacOS::NativeLib <ssl crypto>'.EVAL;
         }
     }
+
     if $prefix {
         note "Using openssl prefix $prefix";
         %libraries =
@@ -33,5 +39,5 @@ method build($cwd --> Bool) {
     try rm($cwd.IO.child('.precomp').absolute, :r, :f, :d);
     try rm($cwd.IO.child('lib/.precomp').absolute, :r, :f, :d);
 
-    return True;
+    True
 }

@@ -17,7 +17,8 @@ $openssl.write("GET / HTTP/1.1\r\nHost: somehost\r\n\r\n");
 
 =head1 DESCRIPTION
 
-A module which provides OpenSSL bindings, making us able to set up a TLS/SSL connection.
+A module which provides OpenSSL bindings, making us able to set up a
+TLS/SSL connection.
 
 =head1 METHODS
 
@@ -40,11 +41,11 @@ method set-fd(OpenSSL:, int32 $fd)
 
 =end code
 
-Assings connection's file descriptor (file handle) $fd to the SSL object.
+Assigns connection's file descriptor (file handle) $fd to the SSL object.
 
-To get the $fd we should use C to set up the connection. (See L<NativeCall>)
-I hope we will be able to use Raku's IO::Socket module instead of
-connecting through C soon-ish.
+To get the $fd we should use C to set up the connection. (See
+L<NativeCall>) I hope we will be able to use Raku's IO::Socket module
+instead of connecting through C soon-ish.
 
 =head2 method set-connect-state
 
@@ -253,6 +254,21 @@ $md5.addfile('myfile');             # Read a file
 my $hexdigest = $md5.hex;           # hex hash  (and reset)
 
 =end code
+
+=head1 CAVEATS
+
+=head2 MacOS
+
+Many native libraries on MacOS are installed with the C<brew> command
+line interface.  For this module one would typically have to do a
+C<brew install openssl>.
+
+The use of native libraries is slightly more complicated on the MacOS
+operating system than on other operating systems.  This generally means
+that a symlink needs to be installed in a trusted filesystem location.
+If the L<C<MacOS::NativeLib>|https://raku.land/zef:lizmat/MacOS::NativeLib>
+distribution is installed, then these symlinks will be automatically
+created when this module is built.
 
 =head1 SEE ALSO
 

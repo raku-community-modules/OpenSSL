@@ -1,6 +1,9 @@
 Revision history for OpenSSL
 
 {{$NEXT}}
+    - Fix copyright copy-pasto
+    - Add support for automatic symlink creation on MacOS if the
+      MacOS::NativeLib module is installed
 
 0.2.3  2025-04-27T13:20:11+02:00
     - Added binding to AES-128-CTR, pheix++

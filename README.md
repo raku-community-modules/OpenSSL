@@ -39,7 +39,7 @@ method set-fd
 method set-fd(OpenSSL:, int32 $fd)
 ```
 
-Assings connection's file descriptor (file handle) $fd to the SSL object.
+Assigns connection's file descriptor (file handle) $fd to the SSL object.
 
 To get the $fd we should use C to set up the connection. (See [NativeCall](NativeCall)) I hope we will be able to use Raku's IO::Socket module instead of connecting through C soon-ish.
 
@@ -234,6 +234,16 @@ my $digest = $md5.hash;             # Blob hash (and reset)
 $md5.addfile('myfile');             # Read a file
 my $hexdigest = $md5.hex;           # hex hash  (and reset)
 ```
+
+CAVEATS
+=======
+
+MacOS
+-----
+
+Many native libraries on MacOS are installed with the `brew` command line interface. For this module one would typically have to do a `brew install openssl`.
+
+The use of native libraries is slightly more complicated on the MacOS operating system than on other operating systems. This generally means that a symlink needs to be installed in a trusted filesystem location. If the [`MacOS::NativeLib`](https://raku.land/zef:lizmat/MacOS::NativeLib) distribution is installed, then these symlinks will be automatically created when this module is built.
 
 SEE ALSO
 ========
