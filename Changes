@@ -1,6 +1,8 @@
 Revision history for OpenSSL
 
 {{$NEXT}}
+
+0.2.4  2025-04-28T10:56:06+02:00
     - Fix copyright copy-pasto
     - Add support for automatic symlink creation on MacOS if the
       MacOS::NativeLib module is installed
