@@ -1,5 +1,7 @@
 unit module OpenSSL::NativeLib;
 
+use Resource::Wrangler;
+
 BEGIN my %libraries = Rakudo::Internals::JSON.from-json: %?RESOURCES<libraries.json>.slurp(:close);
 
 sub ssl-lib is export {
@@ -28,20 +30,8 @@ sub crypto-lib is export {
 # and use it if it exists, otherwise copy the name mangled file to this location but using the
 # original unmangled name.
 # XXX: This should be removed when CURI/%?RESOURCES gets a mechanism to bypass name mangling
-use nqp;
 sub dll-resource($resource-name) {
-    my $content-id    = nqp::sha1($resource-name);
-    my $dll-directory = $*TMPDIR.add($content-id);
-    my $dll-resource  = $dll-directory.add($resource-name);
-
-    unless $dll-resource.e {
-        mkdir $dll-directory unless $dll-directory.e;
-        my $resource = %?RESOURCES{$resource-name};
-        my $resource-data := %?RESOURCES{$resource-name}.slurp(:bin, :close);
-        $dll-resource.spurt($resource-data, :bin, :close);
-    }
-
-    $dll-resource.absolute
+    load-resource-to-path($resource-name).absolute
 }
 
 # vim: expandtab shiftwidth=4
