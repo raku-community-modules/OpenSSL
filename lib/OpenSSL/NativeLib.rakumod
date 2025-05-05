@@ -31,7 +31,8 @@ sub crypto-lib is export {
 # original unmangled name.
 # XXX: This should be removed when CURI/%?RESOURCES gets a mechanism to bypass name mangling
 sub dll-resource($resource-name) {
-    load-resource-to-path($resource-name).absolute
+    my $prefix = $*TMPDIR.add($?DISTRIBUTION.Str);
+    load-resource-to-path($resource-name, :$prefix, :filename($resource-name)).absolute
 }
 
 # vim: expandtab shiftwidth=4

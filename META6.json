@@ -5,10 +5,10 @@
   ],
   "build-depends": [
     "PathTools",
-    "JSON::Fast",
-    "Resource::Wrangler"
+    "JSON::Fast"
   ],
   "depends": [
+    "Resource::Wrangler:ver<1.1.1+>"
   ],
   "description": "OpenSSL bindings",
   "license": "MIT",
@@ -46,5 +46,5 @@
   ],
   "test-depends": [
   ],
-  "version": "0.2.5"
+  "version": "0.2.4"
 }
