@@ -101,23 +101,29 @@ sub process($proc, $filename) {
 }
 
 sub install() {
-    my $zef  := $*DISTRO.is-win ?? 'zef.bat' !! 'zef';
-    my $proc := run $zef, "install", ".", "--verbose", "--/test", :out,:err,:merge;
+    my $proc := run 'zef', "install", ".", "--verbose", "--/test", :out,:err,:merge;
     process($proc, "*installation*");
 }
 
 sub test-dir($dir) {
-    for $dir.IO.dir(:test(*.ends-with: '.t' | '.rakutest')).map(*.Str).sort {
-        say "=== $_";
-        my $proc := run "raku", "--ll-exception", "-I.", $_, :out,:err,:merge;
-        process($proc, $_);
-        $done++;
+    my $io := $dir.IO;
+    if $io.e && $io.d {
+        for $io.dir(:test(*.ends-with: '.t' | '.rakutest')).map(*.Str).sort {
+            say "=== $_";
+            my $proc := run "raku", "--ll-exception", "-I.", $_, :out,:err,:merge;
+            process($proc, $_);
+            $done++;
+        }
     }
 }
 
 test-dir("t");
-test-dir($_) for dir("t", :test({ !.starts-with(".") && "t/$_".IO.d})).map(*.Str).sort;
-test-dir("xt") if $author && "xt".IO.e;
+if "t".IO.e {
+    test-dir($_) for dir(
+      "t", :test({ !.starts-with(".") && "t/$_".IO.d})
+    ).map(*.Str).sort;
+}
+test-dir("xt") if $author;
 if $install {
     install;
     ++$done;

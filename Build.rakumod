@@ -1,5 +1,5 @@
-use PathTools;
-use JSON::Fast;
+use PathTools:ver<0.2.0+>:auth<github:ugexe>;
+use JSON::Fast:ver<0.19+>:auth<cpan:TIMOTIMO>;
 
 unit class Build;
 

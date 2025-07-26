@@ -1,15 +1,7 @@
-#!/usr/bin/env raku
-
-use v6.c;
-use OpenSSL;
 use Test;
-plan 4;
+use OpenSSL;
 
-unless %*ENV<NETWORK_TESTING> {
-    diag "NETWORK_TESTING was not set";
-    skip-rest("NETWORK_TESTING was not set");
-    exit;
-}
+plan 4;
 
 my $ssl = OpenSSL.new(:client);
 
@@ -21,5 +13,4 @@ is $ssl.connect, 1, 'connect success';
 ok $ssl.write("GET / HTTP/1.1\r\nHost: api.soundcloud.com\r\nConnection:close\r\n\r\n"), 'write success';
 ok $ssl.read(1024).chars, "and got some data back";
 
-
-done-testing;
+# vim: expandtab shiftwidth=4

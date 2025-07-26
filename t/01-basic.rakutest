@@ -1,5 +1,5 @@
-use OpenSSL;
 use Test;
+use OpenSSL;
 
 plan 7;
 

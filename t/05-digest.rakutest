@@ -1,19 +1,52 @@
 use Test;
 use OpenSSL::Digest;
 
-plan 5;
+plan 24;
 
-my $test-str = "foo bar";
-my $test-buf = $test-str.encode: 'ascii';
-my $sha1 = [~] .list».fmt: "%02x" given sha1 $test-buf;
-my $sha256 = [~] .list».fmt: "%02x" given sha256 $test-buf;
-my $sha384 = [~] .list».fmt: "%02x" given sha384 $test-buf;
-my $sha512 = [~] .list».fmt: "%02x" given sha512 $test-buf;
+my $test-str := "foo bar";
+my $test-buf := $test-str.encode: 'ascii';
 
-is $sha1, '3773dea65156909838fa6c22825cafe090ff8030', "sha1";
-is $sha256, 'fbc1a9f858ea9e177916964bd88c3d37b91a1e84412765e29950777f265c4b75', "sha256";
-is $sha384, '6839312f3db343477070d3c0b2becd417b357154d48794d01d78cfb4617ed5ab819a77b6832f6542dd18bb738131ef7e', "sha384";
-is $sha512, '65019286222ace418f742556366f9b9da5aaf6797527d2f0cba5bfe6b2f8ed24746542a0f2be1da8d63c2477f688b608eb53628993afa624f378b03f10090ce7', 'sha512';
-is md5('abc'.encode: 'ascii').list».fmt("%02x").join, '900150983cd24fb0d6963f7d28e17f72', "md5";
+my $test-io  := $*PROGRAM.sibling("digest-source");
+$test-io.spurt($test-str);
+
+my $md5    = $_».fmt("%02x").join given md5    $test-buf;
+my $sha1   = $_».fmt("%02x").join given sha1   $test-buf;
+my $sha224 = $_».fmt("%02x").join given sha224 $test-buf;
+my $sha256 = $_».fmt("%02x").join given sha256 $test-buf;
+my $sha384 = $_».fmt("%02x").join given sha384 $test-buf;
+my $sha512 = $_».fmt("%02x").join given sha512 $test-buf;
+
+is $_,
+  '327b6f07435811239bc47e1544353273',
+  "md5"
+for $md5, md5-hex($test-str), md5-hex($test-buf), md5-hex($test-io);
+
+is $_,
+  '3773dea65156909838fa6c22825cafe090ff8030',
+  "sha1"
+for $sha1, sha1-hex($test-str), sha1-hex($test-buf), sha1-hex($test-io);
+
+is $_,
+  '9940d35c18ef876ead058472837193fe4b636ff03616fed3b022857d',
+  "sha224"
+for $sha224, sha224-hex($test-str), sha224-hex($test-buf), sha224-hex($test-io);
+
+is $sha256,
+  'fbc1a9f858ea9e177916964bd88c3d37b91a1e84412765e29950777f265c4b75',
+  "sha256"
+for $sha256, sha256-hex($test-str), sha256-hex($test-buf), sha256-hex($test-io);
+
+is $sha384,
+  '6839312f3db343477070d3c0b2becd417b357154d48794d01d78cfb4617ed5ab819a77b6832f6542dd18bb738131ef7e',
+  "sha384"
+for $sha384, sha384-hex($test-str), sha384-hex($test-buf), sha384-hex($test-io);
+
+is $sha512,
+  '65019286222ace418f742556366f9b9da5aaf6797527d2f0cba5bfe6b2f8ed24746542a0f2be1da8d63c2477f688b608eb53628993afa624f378b03f10090ce7',
+  'sha512'
+for $sha512, sha512-hex($test-str), sha512-hex($test-buf), sha512-hex($test-io);
+
+# Clean up
+END $test-io.unlink;
 
 # vim: expandtab shiftwidth=4

@@ -49,3 +49,5 @@ class OpenSSL::Digest::MD5
         self.hash.list».fmt("%02x").join;
     }
 }
+
+# vim: expandtab shiftwidth=4

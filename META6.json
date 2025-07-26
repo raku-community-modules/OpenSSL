@@ -1,11 +1,12 @@
 {
   "auth": "zef:raku-community-modules",
   "authors": [
-    "Filip Sergot"
+    "Filip Sergot",
+    "Elizabeth Mattijsen <liz@raku.rocks>"
   ],
   "build-depends": [
-    "PathTools",
-    "JSON::Fast"
+    "PathTools:ver<0.2.0>:auth<github:ugexe>",
+    "JSON::Fast:ver<0.19+>:auth<cpan:TIMOTIMO>"
   ],
   "depends": [
   ],
@@ -41,7 +42,7 @@
     "libraries.json"
   ],
   "source-url": "https://github.com/raku-community-modules/OpenSSL.git",
-  "tags": [
+  "tags": [ "OPENSSL", "MD5", "SHA1", "SHA224", "SHA256", "SHA384", "SHA256"
   ],
   "test-depends": [
   ],
