@@ -212,12 +212,43 @@ my $plaintext = decrypt($ciphertext,
 OpenSSL::Digest
 ---------------
 
-Digest Functions (currently only md5/sha1/sha256/sha384/sha512)
-
 ```raku
 use OpenSSL::Digest;
-my Blob $digest = md5("xyz".encode);
+
+my Blob $digest = md5("filename".IO);    # IO::Path object
+my Blob $digest = md5(Blob.new(1,2,3));  # Blob object
+my Blob $digest = md5("foo bar");        # coercible to string
+
+say md5-hex("foo bar");  # 327b6f07435811239bc47e1544353273
 ```
+
+Digest Functions exported as subroutines. Takes either an `IO::Path` object of a path of which to create a digest, or a `Blob` object, or an object that can be coerced to a string. A `Blob` is always returned.
+
+  * md5
+
+  * sha1
+
+  * sha224
+
+  * sha256
+
+  * sha384
+
+  * sha512
+
+These subroutines have hexified counterparts with the same name, but postfixed with "-hex", which return a string (lowercase hexadecimal characters) representation of the digest.
+
+  * md5-hex
+
+  * sha1-hex
+
+  * sha224-hex
+
+  * sha256-hex
+
+  * sha384-hex
+
+  * sha512-hex
 
 OpenSSL::Digest::MD5
 --------------------
@@ -250,10 +281,12 @@ SEE ALSO
 
 [IO::Socket::SSL](IO::Socket::SSL)
 
-AUTHOR
-======
+AUTHORS
+=======
 
   * Filip Sergot
+
+  * Elizabeth Mattijsen
 
 Source can be located at: https://github.com/raku-community-modules/OpenSSL . Comments and Pull Requests are welcome.
 

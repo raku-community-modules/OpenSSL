@@ -1,6 +1,8 @@
 Revision history for OpenSSL
 
 {{$NEXT}}
+
+0.2.5  2025-07-26T15:44:53+02:00
     - Tighten build dependencies
     - Add support for sha224 digests
     - Allow all digest subroutines (md5,sha1/224/256/384/512) to

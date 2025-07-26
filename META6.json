@@ -42,9 +42,16 @@
     "libraries.json"
   ],
   "source-url": "https://github.com/raku-community-modules/OpenSSL.git",
-  "tags": [ "OPENSSL", "MD5", "SHA1", "SHA224", "SHA256", "SHA384", "SHA256"
+  "tags": [
+    "OPENSSL",
+    "MD5",
+    "SHA1",
+    "SHA224",
+    "SHA256",
+    "SHA384",
+    "SHA256"
   ],
   "test-depends": [
   ],
-  "version": "0.2.4"
+  "version": "0.2.5"
 }
