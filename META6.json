@@ -2,10 +2,10 @@
   "auth": "zef:raku-community-modules",
   "authors": [
     "Filip Sergot",
-    "Elizabeth Mattijsen <liz@raku.rocks>"
+    "Elizabeth Mattijsen"
   ],
   "build-depends": [
-    "PathTools:ver<0.2.0>:auth<github:ugexe>",
+    "File::Directory::Tree:ver<0.2+>:auth<zef:raku-community-modules>",
     "JSON::Fast:ver<0.19+>:auth<cpan:TIMOTIMO>"
   ],
   "depends": [
@@ -13,7 +13,6 @@
   "description": "OpenSSL bindings",
   "license": "MIT",
   "name": "OpenSSL",
-  "perl": "6.*",
   "provides": {
     "OpenSSL": "lib/OpenSSL.rakumod",
     "OpenSSL::Bio": "lib/OpenSSL/Bio.rakumod",
@@ -41,7 +40,11 @@
     "libeay32.dll",
     "libraries.json"
   ],
-  "source-url": "https://github.com/raku-community-modules/OpenSSL.git",
+  "support": {
+    "bugtracker": "https://github.com/raku-community-modules/OpenSSL/issues",
+    "email": "community@raku.org",
+    "source": "https://github.com/raku-community-modules/OpenSSL.git"
+  },
   "tags": [
     "OPENSSL",
     "MD5",
@@ -50,8 +53,6 @@
     "SHA256",
     "SHA384",
     "SHA256"
-  ],
-  "test-depends": [
   ],
   "version": "0.2.5"
 }

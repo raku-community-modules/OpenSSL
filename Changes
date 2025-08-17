@@ -1,6 +1,10 @@
 Revision history for OpenSSL
 
 {{$NEXT}}
+    - Change build dependency of "PathTools" to the Raku Community
+      module "File::Directory::Tree" dependency, because it is also
+      a Raku Community module
+    - Modernized META file a bit
 
 0.2.5  2025-07-26T15:44:53+02:00
     - Tighten build dependencies
