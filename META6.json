@@ -40,6 +40,7 @@
     "libeay32.dll",
     "libraries.json"
   ],
+  "source-url": "https://github.com/raku-community-modules/OpenSSL.git",
   "support": {
     "bugtracker": "https://github.com/raku-community-modules/OpenSSL/issues",
     "email": "community@raku.org",
@@ -54,5 +55,7 @@
     "SHA384",
     "SHA256"
   ],
-  "version": "0.2.5"
+  "test-depends": [
+  ],
+  "version": "0.2.6"
 }

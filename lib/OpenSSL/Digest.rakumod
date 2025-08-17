@@ -112,6 +112,6 @@ my sub sha512-hex(Any:D $source --> Str:D) is export { hexify sha512 $source }
 
 #- hack ------------------------------------------------------------------------
 # To allow version fetching
-module OpenSSL::Digest:ver<0.2.5>:auth<raku-community-modules> { }
+module OpenSSL::Digest:ver<0.2.6>:auth<raku-community-modules> { }
 
 # vim: expandtab shiftwidth=4
