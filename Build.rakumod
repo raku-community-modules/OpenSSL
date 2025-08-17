@@ -30,7 +30,7 @@ method build($cwd --> Bool) {
     }
 
     my $json = to-json(%libraries, :pretty, :sorted-keys);
-    $*PROGRAM.child("resources/libraries.json").spurt: $json;
+    "resources/libraries.json".IO.spurt: $json;
 
     # DO NOT COPY THIS SOLUTION
     # Delete precomp files when building in case the openssl libs have since been updated
