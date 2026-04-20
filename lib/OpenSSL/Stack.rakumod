@@ -1,16 +1,14 @@
-unit module OpenSSL::Stack;
+unit class OpenSSL::Stack is repr('CStruct');
 
 use NativeCall;
 use OpenSSL::NativeLib;
 use OpenSSL::Version;
 
-class OpenSSL::Stack is repr('CStruct') {
-    has int32 $.num;
-    has CArray[CArray[uint8]] $.data;
-    has int32 $.sorted;
-    has int32 $.num_alloc;
-    has Pointer $.comp;
-}
+has int32 $.num;
+has CArray[CArray[uint8]] $.data;
+has int32 $.sorted;
+has int32 $.num_alloc;
+has Pointer $.comp;
 
 my sub real_symbol(Str $sym) returns Str {
     state Int $v = OpenSSL::Version::version_num();
