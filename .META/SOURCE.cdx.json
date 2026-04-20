@@ -4,7 +4,7 @@
   "specVersion": "1.6",
   "version": 1,
   "metadata": {
-    "timestamp": "2025-08-17T10:18:04+00:00",
+    "timestamp": "2026-04-20T21:51:47+00:00",
     "lifecycles": [
       {
         "phase": "pre-build"
@@ -23,7 +23,7 @@
     "component": {
       "type": "library",
       "mime-type": "text/plain",
-      "bom-ref": "pkg:raku/zef:raku-community-modules/OpenSSL@0.2.6",
+      "bom-ref": "pkg:raku/zef:raku-community-modules/OpenSSL@0.2.7",
       "authors": [
         {
           "bom-ref": "FilipSergot",
@@ -37,7 +37,7 @@
       "publisher": "zef",
       "group": "zef:raku-community-modules",
       "name": "OpenSSL",
-      "version": "0.2.6",
+      "version": "0.2.7",
       "description": "OpenSSL bindings",
       "scope": "required",
       "licenses": [
@@ -49,14 +49,14 @@
           }
         }
       ],
-      "purl": "pkg:raku/zef:raku-community-modules/OpenSSL@0.2.6",
+      "purl": "pkg:raku/zef:raku-community-modules/OpenSSL@0.2.7",
       "externalReferences": [
         {
           "url": "https://github.com/raku-community-modules/OpenSSL",
           "type": "distribution"
         },
         {
-          "url": "https://raku.land/zef:raku-community-modules/OpenSSL?v=0.2.6",
+          "url": "https://raku.land/zef:raku-community-modules/OpenSSL?v=0.2.7",
           "type": "documentation"
         },
         {
@@ -68,7 +68,7 @@
           "type": "license"
         },
         {
-          "url": "https://github.com/raku-community-modules/OpenSSL/archive/refs/tags/0.2.6.zip",
+          "url": "https://github.com/raku-community-modules/OpenSSL/archive/refs/tags/0.2.7.zip",
           "type": "source-distribution"
         },
         {
@@ -171,7 +171,7 @@
       "publisher": "Rakudo Core Developers",
       "group": "Rakudo Core Developers",
       "name": "Rakudo",
-      "version": "2025.06.1-14-g2d75c305e",
+      "version": "2026.03-33-g4ee541b5c",
       "description": "The Rakudo™ Compiler implementing the Raku® Programming Language",
       "scope": "required",
       "licenses": [
@@ -183,7 +183,7 @@
           }
         }
       ],
-      "copyright": "© 2006 - 2025 Yet Another Society",
+      "copyright": "© 2006 - 2026 Yet Another Society",
       "externalReferences": [
         {
           "url": "https://github.com/rakudo/rakudo",
@@ -194,7 +194,7 @@
           "type": "issue-tracker"
         },
         {
-          "url": "https://github.com/rakudo/rakudo/archive/2d75c305e.zip",
+          "url": "https://github.com/rakudo/rakudo/archive/4ee541b5c.zip",
           "type": "source-distribution"
         },
         {
@@ -215,7 +215,7 @@
       "publisher": "The MoarVM Team",
       "group": "The MoarVM Team",
       "name": "Moar",
-      "version": "2025.06-5-gb1c74b8d8",
+      "version": "2026.03-4-gc7365e733",
       "description": "Short for \"Metamodel On A Runtime\", MoarVM is a modern virtual machine built for the Rakudo compiler and the NQP Compiler Toolchain.",
       "scope": "required",
       "licenses": [
@@ -227,7 +227,7 @@
           }
         }
       ],
-      "copyright": "© 2012 - 2025 Jonathan Worthington",
+      "copyright": "© 2012 - 2026 Jonathan Worthington",
       "externalReferences": [
         {
           "url": "https://github.com/MoarVM/MoarVM",
@@ -242,7 +242,7 @@
           "type": "chat"
         },
         {
-          "url": "https://github.com/MoarVM/MoarVM.git/archive/refs/tags/b1c74b8d8.zip",
+          "url": "https://github.com/MoarVM/MoarVM.git/archive/refs/tags/c7365e733.zip",
           "type": "source-distribution"
         }
       ]
@@ -369,7 +369,7 @@
       "type": "distribution"
     },
     {
-      "url": "https://raku.land/zef:raku-community-modules/OpenSSL?v=0.2.6",
+      "url": "https://raku.land/zef:raku-community-modules/OpenSSL?v=0.2.7",
       "type": "documentation"
     },
     {
@@ -381,7 +381,7 @@
       "type": "license"
     },
     {
-      "url": "https://github.com/raku-community-modules/OpenSSL/archive/refs/tags/0.2.6.zip",
+      "url": "https://github.com/raku-community-modules/OpenSSL/archive/refs/tags/0.2.7.zip",
       "type": "source-distribution"
     },
     {

@@ -2,6 +2,10 @@ Revision history for OpenSSL
 
 {{$NEXT}}
 
+0.2.7  2026-04-20T23:52:44+02:00
+    - Fix improper use of namespace nesting, ugexe++
+    - Update copyright year
+
 0.2.6  2025-08-17T12:19:34+02:00
     - Change build dependency of "PathTools" to the Raku Community
       module "File::Directory::Tree" dependency, because it is also

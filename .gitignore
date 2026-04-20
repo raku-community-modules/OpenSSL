@@ -1,4 +1,5 @@
 .precomp/
 resources/libraries.json
 .idea/
+/OpenSSL-*
 *.rakucov
