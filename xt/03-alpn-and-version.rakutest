@@ -1,0 +1,49 @@
+use Test;
+use OpenSSL;
+use lib 'xt/lib';
+use OpenSSL::TestHelpers;
+
+my @hosts = <raku.org apple.com>;
+
+plan +@hosts * 7;
+
+unless find-program('curl') {
+    skip-rest 'curl is not installed';
+    exit;
+}
+
+for @hosts -> $host {
+    my CurlResult $curl-result = run-curl($host);
+    ok $curl-result.exitcode == 0, "$host: curl exited successfully";
+
+    unless $curl-result.exitcode == 0
+        && $curl-result.tls-version
+        && $curl-result.alpn {
+        skip "$host: curl did not provide TLS/ALPN data", 6;
+        next;
+    }
+
+    my $conn = try IO::Socket::INET.new(:$host, :port(443));
+    ok $conn, "$host: TCP connection established";
+
+    without $conn {
+        skip "$host: could not create TCP connection", 5;
+        next;
+    }
+
+    LEAVE $conn.close with $conn;
+
+    my $openssl = OpenSSL.new(:client);
+    $openssl.set-fd($conn.native-descriptor);
+    lives-ok { $openssl.set-sni-host-name($host) },
+        "$host: SNI setup succeeds";
+    lives-ok { $openssl.set-alpn-protocols('h2', 'http/1.1') },
+        "$host: ALPN setup succeeds";
+    lives-ok { $openssl.connect }, "$host: TLS connect succeeds";
+
+    is $openssl.version-name, $curl-result.tls-version,
+        "$host: TLS version matches curl";
+
+    is $openssl.selected-alpn, $curl-result.alpn,
+        "$host: ALPN matches curl";
+}
