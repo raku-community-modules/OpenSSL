@@ -1,6 +1,8 @@
 Revision history for OpenSSL
 
 {{$NEXT}}
+    - Update JSON::Fast dependency to its new home
+	- Add support for ALPN, SNI, and negotiated protocol version, keatumal++
 
 0.2.7  2026-04-20T23:52:44+02:00
     - Fix improper use of namespace nesting, ugexe++
