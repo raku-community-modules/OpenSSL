@@ -1,5 +1,5 @@
 use File::Directory::Tree:ver<0.2+>:auth<zef:raku-community-modules>;
-use JSON::Fast:ver<0.19+>:auth<cpan:TIMOTIMO>;
+use JSON::Fast:ver<0.20+>:auth<zef:timo>;
 
 unit class Build;
 
