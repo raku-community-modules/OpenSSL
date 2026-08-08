@@ -1,6 +1,8 @@
 Revision history for OpenSSL
 
 {{$NEXT}}
+
+0.2.8  2026-08-01T19:28:51+02:00
     - Update JSON::Fast dependency to its new home
 	- Add support for ALPN, SNI, and negotiated protocol version, keatumal++
 
