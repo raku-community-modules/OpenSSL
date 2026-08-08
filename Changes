@@ -2,6 +2,12 @@ Revision history for OpenSSL
 
 {{$NEXT}}
 
+0.2.9  2026-08-08T19:07:23+02:00
+    - O.2.5 made the various subs return a blob8 rather than a buf8,
+      which broke the PKCSS and Auth::Scram modules.  So revert to
+      returning a (mutable) buf8, at least for now.  Spotted by
+      ugexe++
+
 0.2.8  2026-08-01T19:28:51+02:00
     - Update JSON::Fast dependency to its new home
 	- Add support for ALPN, SNI, and negotiated protocol version, keatumal++

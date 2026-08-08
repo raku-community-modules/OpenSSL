@@ -1,0 +1,13 @@
+use Test;
+use OpenSSL::Digest;
+
+plan 6;
+
+isa-ok md5(   Blob.new), buf8, 'md5 returns a buf8';
+isa-ok sha1(  Blob.new), buf8, 'sha1 returns a buf8';
+isa-ok sha224(Blob.new), buf8, 'sha224 returns a buf8';
+isa-ok sha256(Blob.new), buf8, 'sha256 returns a buf8';
+isa-ok sha384(Blob.new), buf8, 'sha385 returns a buf8';
+isa-ok sha512(Blob.new), buf8, 'sha512 returns a buf8';
+
+# vim: expandtab shiftwidth=4
