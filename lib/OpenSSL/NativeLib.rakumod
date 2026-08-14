@@ -1,6 +1,9 @@
 unit module OpenSSL::NativeLib;
 
-BEGIN my %libraries = Rakudo::Internals::JSON.from-json: %?RESOURCES<libraries.json>.slurp(:close);
+constant %libraries = do {
+    use JSON::Fast;
+    from-json(%?RESOURCES<libraries.json>.slurp(:close));
+}
 
 sub ssl-lib is export {
     state $lib = $*DISTRO.is-win
