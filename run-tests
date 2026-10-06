@@ -1,6 +1,7 @@
 unit sub MAIN(
   :a($author),
   :i($install),
+  :$rakuast,
   :$rmd,
   :$disable-spesh,
   :$disable-spesh-inline,
@@ -12,6 +13,11 @@ unit sub MAIN(
 
 say run(<raku --version>, :out).out.slurp.chomp;
 say "Running on $*DISTRO.gist().\n";
+
+if $rakuast {
+    %*ENV<RAKUDO_RAKUAST> := 1;
+    say "RAKUDO_RAKUAST=1";
+}
 
 if $rmd {
     %*ENV<RAKUDO_MODULE_DEBUG> := 1;
